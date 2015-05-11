@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict';
 var argv = require('yargs')
     .usage('Usage: $0 [options] -- <server> <server options>')

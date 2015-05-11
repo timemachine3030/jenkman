@@ -1,6 +1,6 @@
 {
   "name": "jenkman",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Jenkins CI testing of node API servers with Postman/Newman",
   "main": "index.js",
   "bin": {
