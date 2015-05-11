@@ -1,0 +1,41 @@
+{
+  "name": "jenkman",
+  "version": "1.0.0",
+  "description": "Jenkins CI testing of node API servers with Postman/Newman",
+  "main": "index.js",
+  "bin": {
+    "jenkman": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timemachine3030/jenkman.git"
+  },
+  "keywords": [
+    "jenkins",
+    "integration.testing",
+    "newman",
+    "postman",
+    "nodejs",
+    "RESTify",
+    "api"
+  ],
+  "author": "Daniel Lopretto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timemachine3030/jenkman/issues"
+  },
+  "homepage": "https://github.com/timemachine3030/jenkman",
+  "dependencies": {
+    "async": "^0.9.0",
+    "bunyan": "^1.3.5",
+    "newman": "^1.2.15",
+    "xmlbuilder": "^2.6.2",
+    "yargs": "^3.8.0"
+  },
+  "devDependencies": {
+    "xml2js": "^0.4.8"
+  }
+}

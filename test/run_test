@@ -1,0 +1,9 @@
+node ../index.js \
+    -c tests.postman_collection.json \
+    -e localhost.postman_environment.json \
+    test-server.js
+
+echo ''
+echo ''
+
+node test-server-check.js

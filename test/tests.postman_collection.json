@@ -1,0 +1,60 @@
+{
+	"id": "5cb3d790-1960-628e-33ff-2caf1b80dd4b",
+	"name": "tests",
+	"description": "",
+	"order": [
+		"82cc25ce-b680-7566-8809-0a2aff79dec9",
+		"c9d4de7f-8c18-ff86-961e-fb3037ecd483"
+	],
+	"folders": [],
+	"timestamp": 1431296022896,
+	"synced": false,
+	"owner": "15837",
+	"sharedWithTeam": false,
+	"subscribed": false,
+	"remoteLink": "",
+	"public": false,
+	"write": true,
+	"requests": [
+		{
+			"id": "82cc25ce-b680-7566-8809-0a2aff79dec9",
+			"headers": "",
+			"url": "{{protocol}}://{{url}}/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Request 502 Not Implemented\"] = responseCode.code === 501;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1431296274075,
+			"name": "Request Not Implemented",
+			"description": "",
+			"collectionId": "5cb3d790-1960-628e-33ff-2caf1b80dd4b",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "c9d4de7f-8c18-ff86-961e-fb3037ecd483",
+			"headers": "",
+			"url": "{{protocol}}://{{url}}/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Request 200 OK\"] = responseCode.code === 200;",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1431297331715,
+			"name": "Request OK [fail]",
+			"description": "",
+			"collectionId": "5cb3d790-1960-628e-33ff-2caf1b80dd4b",
+			"responses": [],
+			"synced": false
+		}
+	]
+}
