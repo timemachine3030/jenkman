@@ -1,6 +1,6 @@
 {
   "name": "jenkman",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "Jenkins CI testing of node API servers with Postman/Newman",
   "main": "index.js",
   "bin": {
@@ -36,6 +36,7 @@
     "yargs": "^3.8.0"
   },
   "devDependencies": {
+    "chai": "^2.3.0",
     "xml2js": "^0.4.8"
   }
 }
