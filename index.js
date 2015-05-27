@@ -18,6 +18,7 @@ var argv = require('yargs')
     .describe('cover', 'generate coverage report with istanbul')
     
     // Verbose
+    .boolean('v')
     .alias('v', 'verbose')
     .describe('v', 'extra debugging information')
 
@@ -62,7 +63,7 @@ async.waterfall([
             },
             executables: {},
             coverage: argv.cover,
-            verbose: argv.verbose
+            verbose: argv.v
         };
 
         if (options.coverage) {
@@ -80,6 +81,7 @@ async.waterfall([
 
         done(null, options);
     }, 
+    lib.findPathsForExecutables,
     lib.startApi,
     lib.runtests,
     lib.parseResults,

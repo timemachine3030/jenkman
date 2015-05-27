@@ -23,10 +23,10 @@ module.exports = {
                 locations.every(function (l) {
                     var loc = path.join(l, ex);
                     try {
-                        var stats = fs.statSync(loc);
+                        var stats = fs.statSync(loc); // jshint: ignore
                         if (stats.isFile()) {
                             if (options.verbose) {
-                                util.log(ex, 'found at:', loc);
+                                util.log(ex + ' found at: ' + loc);
                             }
                             options.executables[ex] = loc;
                             return false;
@@ -54,6 +54,9 @@ module.exports = {
             var output = {};
             try {
                 output = JSON.parse(data);
+            } catch (e) {
+                util.log('Error parsing JSON');
+                console.log(e.stack);
             } finally {
                 if (output.msg === 'listening') {
                     util.log('... server ready');
@@ -70,7 +73,7 @@ module.exports = {
     },
     runtests: function runtests(options, done) {
         util.log('Start Newman to Test Collection', options.newman.collection);
-        var newman = options.processes.newman = spawn(__dirname + '/node_modules/.bin/newman',  [
+        var newman = options.processes.newman = spawn(options.executables.newman,  [
             '--environment', options.newman.environment,
             '--collection', options.newman.collection,
             '--noColor',
@@ -129,9 +132,9 @@ module.exports = {
                     if (count.fail) {
                         data = util.format('%s (failed %d of %d iterations)',
                                            test, count.fail, iterations);
-                                           tc.ele('failure', {
-                                               type: 'Post-request Test'
-                                           }, data);
+                        tc.ele('failure', {
+                            type: 'Post-request Test'
+                        }, data);
                     }
                 });
             } else {
@@ -151,10 +154,7 @@ module.exports = {
         xml.att('failures', totalFails);
         fs.writeFile(options.newman.results.xml, xml.end({pretty: true}), function (err) {
             util.log('...complete');
-
             done(err, options);
-            //emitLogs();
-
         });
     },
     emitLogs: function emitLogs(options, done) {
@@ -164,18 +164,20 @@ module.exports = {
         console.log('*');
         console.log(Buffer.concat(options.newman.log).toString('utf8'));
 
-        console.log('*');
-        console.log('* API Server Log');
-        console.log('*');
-        console.log('');
-        var b = spawn(__dirname + '/node_modules/.bin/bunyan', [
-            options.server.log
-        ]);
-        b.stdout.pipe(process.stdout);
-        b.on('close', function () {
+        if (options.verbose) {
+            console.log('*');
+            console.log('* API Server Log');
+            console.log('*');
+            console.log('');
+            var b = spawn(options.executables.bunyan, [
+                options.server.log
+            ]);
+            b.stdout.pipe(process.stdout);
+            b.on('close', function () {
+                done(null, options);
+            });
+        } else {
             done(null, options);
-        });
+        }
     }
 };
-
-
