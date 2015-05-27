@@ -57,6 +57,7 @@ async.waterfall([
                 bunyan: null
             },
             steps: {
+                node: true,
                 newman: true,
                 bunyan: true,
                 istanbul: false

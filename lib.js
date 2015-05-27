@@ -47,7 +47,7 @@ module.exports = {
     startApi: function startApi(options, done) {
         util.log('Starting API Server', options.server.main);
         var log = fs.createWriteStream(options.server.log);
-        options.processes.server = spawn('/usr/local/bin/node', options.server.opts, {
+        options.processes.server = spawn(options.executables.node, options.server.opts, {
             //cwd: path.dirname(options.server.main)
         });
         options.processes.server.stdout.on('data', function (data) {
