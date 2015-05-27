@@ -64,7 +64,8 @@ async.waterfall([
             },
             executables: {},
             coverage: argv.cover,
-            verbose: argv.v
+            verbose: argv.v,
+            exitCode: 0
         };
 
         if (options.coverage) {
@@ -92,7 +93,5 @@ async.waterfall([
     if (err) {
         console.error(err);
     }
-    if (options.newman) {
-        process.exit(options.newman.exitCode);
-    }
+    process.exit(options.exitCode);
 });

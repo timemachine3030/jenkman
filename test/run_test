@@ -1,4 +1,4 @@
-node ../index.js \
+node ../index.js -v \
     -c tests.postman_collection.json \
     -e localhost.postman_environment.json \
     test-server.js
@@ -7,3 +7,10 @@ echo ''
 echo ''
 
 node test-server-check.js
+
+node ../index.js -v \
+    -c tests.postman_collection.json \
+    -e localhost.postman_environment.json \
+    test-server-errors.js
+
+echo exit code: $?
