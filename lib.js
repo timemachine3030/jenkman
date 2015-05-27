@@ -68,8 +68,10 @@ module.exports = {
         options.processes.server.stderr.pipe(log);
         options.processes.server.on('close', function (code, err) {
             console.error('server exited with code', code, err || '');
-            done(err || 'API server failed to init', options);
-        });
+            this.emitServerLogs(options, function (e) {
+                done(e || err || 'API server failed to init', options);
+            });
+        }.bind(this));
     },
     runtests: function runtests(options, done) {
         util.log('Start Newman to Test Collection', options.newman.collection);
@@ -165,19 +167,22 @@ module.exports = {
         console.log(Buffer.concat(options.newman.log).toString('utf8'));
 
         if (options.verbose) {
-            console.log('*');
-            console.log('* API Server Log');
-            console.log('*');
-            console.log('');
-            var b = spawn(options.executables.bunyan, [
-                options.server.log
-            ]);
-            b.stdout.pipe(process.stdout);
-            b.on('close', function () {
-                done(null, options);
-            });
+            this.emitServerLogs(options, done);
         } else {
             done(null, options);
         }
+    },
+    emitServerLog: function emitServerLogs(options, done) {
+        console.log('*');
+        console.log('* API Server Log');
+        console.log('*');
+        console.log('');
+        var b = spawn(options.executables.bunyan, [
+            options.server.log
+        ]);
+        b.stdout.pipe(process.stdout);
+        b.on('close', function () {
+            done(null, options);
+        });
     }
 };
